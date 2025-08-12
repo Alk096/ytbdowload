@@ -35,7 +35,7 @@
 """
 #duplication
 """
-    copy() : Créer une copie superficielle de la liste
+    l.copy() : Créer une copie superficielle de la liste
 
 """
 
@@ -49,6 +49,12 @@ def afficherNom(list = []):
     print('======= Affichage de la List =========')
     for item in list:
         print(item)
+    #for item in range(len(list)):
+        #    print(list[item])
+    #for index, item in enumerate(list):
+    #    print(f'Index : {index}, Item : {item}')
+    #for item, index in zip(list, range(len(list))):
+    #    print(f'Index : {index}, Item : {item}')
 
 
 def supprimerNom(list = []):
