@@ -53,8 +53,8 @@ def afficherNom(list = []):
         #    print(list[item])
     #for index, item in enumerate(list):
     #    print(f'Index : {index}, Item : {item}')
-    #for item, index in zip(list, range(len(list))):
-    #    print(f'Index : {index}, Item : {item}')
+    #for langues, noms, agees in zip(langues, noms, agees):
+    #    print(f'Langue : {langues}, Nom : {noms}, Age : {agees}')
 
 
 def supprimerNom(list = []):
