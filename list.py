@@ -19,6 +19,9 @@
     len(l) : Obtenir la longueur de la liste
     count(item) : Compter le nombre d'occurrences d'un item dans la liste
     l.sort() : Trier la liste en place
+    l.sort(reverse=True) : Trier la liste en place dans l'ordre inverse
+    l.sort(key=len) : Trier la liste en place selon la longueur des items
+    sorted(l) : Retourner une nouvelle liste triée
     l.reverse() : Inverser l'ordre des items dans la liste
     min(l) : Obtenir le plus petit item de la liste
     max(l) : Obtenir le plus grand item de la liste
@@ -26,6 +29,7 @@
 #recherche
 """
     index(item) : Obtenir l'index du premier item correspondant
+    index(item, start, end) : Obtenir l'index du premier item correspondant dans une plage
     in : Vérifier si un item est présent dans la liste
     not in : Vérifier si un item n'est pas présent dans la liste
 """
