@@ -82,7 +82,7 @@ def possition(list = []):
     print('========= La possion d\'un item de la liste ===========')
     try:
         item = input('Nom : ')
-        print(list.indexof(item) + 1)
+        print(list.index(item) + 1)
     except ValueError as e :
         print(f'Error : {e}')
 
@@ -103,8 +103,18 @@ def creerMatrice(lignes, colonnes):
         for j in range(colonnes):
             lignes.append(input(f'Entrez l\'élément de la position ({i+1},{j+1})'))
         Matrice.append(lignes)
+
+def afficherMatrice(list = []):
+    print('========= Affichage de la Matrice =========')
+    for ligne in range(len(list)):
+        for colonnes in range(len(list[ligne])):
+            print(f'{list[ligne][colonnes]}, ({ligne+1},{colonnes+1})')
+
 def main():
+    global Matrice
     print('========= Bienvenue dans la liste ==========')
+    creerMatrice(3,3)
+    afficherMatrice(Matrice)
 
 
 
