@@ -38,6 +38,15 @@
     l.copy() : Créer une copie superficielle de la liste
 
 """
+#parcourir une liste
+"""
+    for item in l : Parcourir les items de la liste
+    for index, item in enumerate(l) : Parcourir les items avec leurs index
+    for item in range(len(l)) : Parcourir les index de la liste
+    for item, next_item in zip(l, l[1:]) : Parcourir les items et leurs suivants
+    for a, b, c in zip(l1, l2, l3) : Parcourir plusieurs listes en parallèle
+    for item in l if condition : Parcourir les items qui satisfont une condition
+"""
 
 
 def ajouterNom(list = []):
@@ -77,13 +86,25 @@ def possition(list = []):
     except ValueError as e :
         print(f'Error : {e}')
 
+# creation d'une liste imbriquée
+ListeImbrique = [
+    'Programming Languages',
+    ['Python', 'Java', 'C++'],
+    [25, 30, 35],
+    'Bob',
+]
+#creation d'une matrice
+Matrice = []
 
+def creerMatrice(lignes, colonnes):
+    global Matrice
+    for i in range(lignes):
+        lignes = []
+        for j in range(colonnes):
+            lignes.append(input(f'Entrez l\'élément de la position ({i+1},{j+1})'))
+        Matrice.append(lignes)
 def main():
-    listNom = ['Alker','Pap','Moussa']
-    # ajouterNom(listNom)
-    # ajouterNom(listNom)
-    afficherNom(listNom)
-    possition(listNom)
+    print('========= Bienvenue dans la liste ==========')
 
 
 
