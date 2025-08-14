@@ -49,73 +49,9 @@
 """
 
 
-def ajouterNom(list = []):
-    item = input('Nom : ')
-    list.append(item)
-
-
-def afficherNom(list = []):
-    print('======= Affichage de la List =========')
-    for item in list:
-        print(item)
-    #for item in range(len(list)):
-        #    print(list[item])
-    #for index, item in enumerate(list):
-    #    print(f'Index : {index}, Item : {item}')
-    #for langues, noms, agees in zip(langues, noms, agees):
-    #    print(f'Langue : {langues}, Nom : {noms}, Age : {agees}')
-
-
-def supprimerNom(list = []):
-    print('========= Suppression d\'un item de la liste ========')
-    item = input('Nom : ')
-    return list.remove(item)
-
-
-def supprimerDernierItem(list = []):
-    list.pop()
-    print('========== Dernier Item supprimer ==========')
-
-
-
-def possition(list = []):
-    print('========= La possion d\'un item de la liste ===========')
-    try:
-        item = input('Nom : ')
-        print(list.index(item) + 1)
-    except ValueError as e :
-        print(f'Error : {e}')
-
-# creation d'une liste imbriquée
-ListeImbrique = [
-    'Programming Languages',
-    ['Python', 'Java', 'C++'],
-    [25, 30, 35],
-    'Bob',
-]
-#creation d'une matrice
-Matrice = []
-
-def creerMatrice(lignes, colonnes):
-    global Matrice
-    for i in range(lignes):
-        lignes = []
-        for j in range(colonnes):
-            lignes.append(input(f'Entrez l\'élément de la position ({i+1},{j+1})'))
-        Matrice.append(lignes)
-
-def afficherMatrice(list = []):
-    print('========= Affichage de la Matrice =========')
-    for ligne in range(len(list)):
-        for colonnes in range(len(list[ligne])):
-            print(f'{list[ligne][colonnes]}, ({ligne+1},{colonnes+1})')
-
-def main():
-    global Matrice
-    print('========= Bienvenue dans la liste ==========')
-    creerMatrice(3,3)
-    afficherMatrice(Matrice)
-
-
-
-main()
+#for item in range(len(list)):
+    #    print(list[item])
+#for index, item in enumerate(list):
+#    print(f'Index : {index}, Item : {item}')
+#for langues, noms, agees in zip(langues, noms, agees):
+#    print(f'Langue : {langues}, Nom : {noms}, Age : {agees}')
