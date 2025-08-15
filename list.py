@@ -41,8 +41,8 @@
 #parcourir une liste
 """
     for item in l : Parcourir les items de la liste
-    for index, item in enumerate(l) : Parcourir les items avec leurs index
     for item in range(len(l)) : Parcourir les index de la liste
+    for index, item in enumerate(l) : Parcourir les items avec leurs index
     for item, next_item in zip(l, l[1:]) : Parcourir les items et leurs suivants
     for a, b, c in zip(l1, l2, l3) : Parcourir plusieurs listes en parallèle
     for item in l if condition : Parcourir les items qui satisfont une condition
