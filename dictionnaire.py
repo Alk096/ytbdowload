@@ -1,0 +1,1 @@
+# le dictionnaire et un paire d'element & key unique et les elements sont muables
