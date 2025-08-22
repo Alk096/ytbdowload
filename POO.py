@@ -27,6 +27,12 @@ class Livre:
             and self.__auteur == value.__auteur
             and self.__annee == value.__annee
         )
+        
+    def getTitre(self):
+        return self.__titre
+    
+    def getAuteur(self):
+        return self.__auteur
 
     
 class Membre:
@@ -49,6 +55,17 @@ class Membre:
         print("=========== Info Membre ============")
         print(f"Nom : {self._nom}")
         print(f"Id Membre : {self._id_membre}")
+        
+    def afficher_membre_livre_preter(self):
+        print("=========== Info Membre ============")
+        print(f"Nom : {self._nom}")
+        print(f"Id Membre : {self._id_membre}")   
+        print("======= Info des livres preter =======")
+        if self.__emprunts:
+            for livre in self.__emprunts:
+                livre.afficher_livre()
+        else:
+            print("Accun livre preter par ce membre")
 
     def getNom(self):
         return self._nom
@@ -128,7 +145,31 @@ class Bibliotheque:
         livre = chercherLivre( titre, auteur, annee, self.__livres)
         if livre.est_disponible:
             membre.emprunter_livre(livre)
+        print(f"{membre.getNom()} a preter {livre.getTitre()} de {livre.getAuteur()}")
 
+    def retourner_livre(self):
+        print("============ Retourner Livre ======================")
+        print("========== Membre Souhaitant Retourner ============")
+        membre = checherMembre(
+            input("Nom : "),
+            int(input("Id : ")),
+            self.__membres
+        )
+        if not membre: return
+        print("=================== Livre Desire ===================")
+        titre = input("Titre : ")
+        auteur = input("Auteur : ")
+        annee = int(input("Annee : "))
+        livre = chercherLivre( titre, auteur, annee, self.__livres)
+        if not livre.est_disponible:
+            membre.retourner_livre(livre)
+        print(f"{membre.getNom()} a preter {livre.getTitre()} de {livre.getAuteur()}")
+        
+    def afficher_membre_livre_preter(self):
+        for membre in self.__membres:
+            membre.afficher_membre_livre_preter()
+        
+        
 
 def checherMembre(nom:str, id:int,membres:list = None):
     membres = membres or []
@@ -174,7 +215,7 @@ def main():
         print("6. Supprimer un Membre")
         print("7. Emprunter un livre")
         print("8. Retourner un livre")
-        print("9. Affiche tout les livres")
+        print("9. Affiche tout les livres Emprunter par chaque membre")
         print("10. Quitter")
         choix = int(input("Choix : "))
         if choix == 1:
@@ -200,8 +241,10 @@ def main():
             pkapkaLecture.emprunter_livre()
         elif choix == 8:
             os.system('cls' if os.name == 'nt' else 'clear')
+            pkapkaLecture.retourner_livre()
         elif choix == 9:
             os.system('cls' if os.name == 'nt' else 'clear')
+            pkapkaLecture.afficher_membre_livre_preter()
         elif choix == 10:
             os.system('cls' if os.name == 'nt' else 'clear')
             break
