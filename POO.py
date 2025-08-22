@@ -37,10 +37,12 @@ class Membre:
         self._id_membre = Membre._id
         self.__emprunts = emprunts if emprunts is not None else []
 
-    def emprunter_livre(self,livre):
+    def emprunter_livre(self,livre:Livre):
+        livre.emprunter()
         self.__emprunts.append(livre)
 
-    def retourner_livre(self, livre):
+    def retourner_livre(self, livre:Livre):
+        livre.retourner()
         self.__emprunts.remove(livre)
 
     def afficher_membre(self):
@@ -109,6 +111,41 @@ class Bibliotheque:
         print("============ Membre de la bibliotheque ==========")
         for membre in self.__membres:
             membre.afficher_membre()
+    
+    def emprunter_livre(self):
+        print("============ Emprunter Livre ======================")
+        print("========== Membre Souhaitant Emprunter ============")
+        membre = checherMembre(
+            input("Nom : "),
+            int(input("Id : ")),
+            self.__membres
+        )
+        if not membre: return
+        print("=================== Livre Desire ===================")
+        titre = input("Titre : ")
+        auteur = input("Auteur : ")
+        annee = int(input("Annee : "))
+        livre = chercherLivre( titre, auteur, annee, self.__livres)
+        if livre.est_disponible:
+            membre.emprunter_livre(livre)
+
+
+def checherMembre(nom:str, id:int,membres:list = None):
+    membres = membres or []
+    for membre in membres:
+        if membre.getNom() == nom and membre.getId() == id:
+            return membre
+    print("Le membre n'est pas trouver")
+    return None 
+    
+def chercherLivre( titre:str, auteur:str, annee:int, livres:list = None):
+    livres = livres or []
+    for livre in livres:
+        if livre == Livre(titre,auteur,annee):
+            return livre
+    print("Le llivre n'est trouver")
+    return None
+
 
 
 livres_test = [
@@ -135,9 +172,10 @@ def main():
         print("4. Afficher Membres")
         print("5. Supprimer un livre")
         print("6. Supprimer un Membre")
-        print("7. Preter un livre")
+        print("7. Emprunter un livre")
         print("8. Retourner un livre")
-        print("9. Quitter")
+        print("9. Affiche tout les livres")
+        print("10. Quitter")
         choix = int(input("Choix : "))
         if choix == 1:
             os.system('cls' if os.name == 'nt' else 'clear')
@@ -159,9 +197,12 @@ def main():
             pkapkaLecture.supprimer_membre()
         elif choix == 7:
             os.system('cls' if os.name == 'nt' else 'clear')
+            pkapkaLecture.emprunter_livre()
         elif choix == 8:
             os.system('cls' if os.name == 'nt' else 'clear')
         elif choix == 9:
+            os.system('cls' if os.name == 'nt' else 'clear')
+        elif choix == 10:
             os.system('cls' if os.name == 'nt' else 'clear')
             break
 
