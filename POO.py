@@ -30,7 +30,7 @@ class Livre:
 
     
 class Membre:
-    _id = 0
+    _id:int = 0
     def __init__(self, nom:str , emprunts:list = None):
         Membre._id+=1
         self._nom = nom
@@ -40,15 +40,19 @@ class Membre:
     def emprunter_livre(self,livre):
         self.__emprunts.append(livre)
 
-    
     def retourner_livre(self, livre):
         self.__emprunts.remove(livre)
-
 
     def afficher_membre(self):
         print("=========== Info Membre ============")
         print(f"Nom : {self._nom}")
         print(f"Id Membre : {self._id_membre}")
+
+    def getNom(self):
+        return self._nom
+    
+    def getId(self):
+        return self._id_membre
 
 
 class Bibliotheque:
@@ -80,7 +84,16 @@ class Bibliotheque:
         nom = input("Nom : ")
         self.__membres.append(Membre(nom))
 
-    # supprimer membre
+    def supprimer_membre(self):
+        print("============ Supprimer un membre ===========")
+        nom = input("Nom : ")
+        id = int(input("Id : "))
+        for membre in self.__membres:
+            if membre.getNom() == nom and membre.getId() == id:
+                self.__membres.remove(membre)
+                print("Membre supprimer")
+                return
+        print("Le memebre n'est pas trouver")
 
     def afficher_livre_disponible(self):
         print("======== Livre disponible ==========")
@@ -143,6 +156,7 @@ def main():
             pkapkaLecture.supprimer_livre()
         elif choix == 6:
             os.system('cls' if os.name == 'nt' else 'clear')
+            pkapkaLecture.supprimer_membre()
         elif choix == 7:
             os.system('cls' if os.name == 'nt' else 'clear')
         elif choix == 8:
