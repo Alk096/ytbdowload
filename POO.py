@@ -63,7 +63,17 @@ class Bibliotheque:
         annee = int(input("Annee : "))
         self.__livres.append(Livre(titre, auteur, annee))
 
-    # supprimer livre
+    def supprimer_livre(self):
+        print("============== Supprimer Livre =============")
+        titre = input("Titre : ")
+        auteur = input("Auteur : ")
+        annee = int(input("Annee : "))
+        for livre in self.__livres:
+            if livre == Livre(titre, auteur, annee):
+                self.__livres.remove(livre)
+                print("Le livre a ete supprimer")
+                return
+        print("Le livre n'est pas trouver")
 
     def ajouter_membre(self):
         print("========== Ajouter un membre =============")
@@ -110,8 +120,11 @@ def main():
         print("2. Ajouter un Membre")
         print("3. Afficher livre disponible")
         print("4. Afficher Membres")
-        # print("7. Rehercher livre")
-        print("8. Quitter")
+        print("5. Supprimer un livre")
+        print("6. Supprimer un Membre")
+        print("7. Preter un livre")
+        print("8. Retourner un livre")
+        print("9. Quitter")
         choix = int(input("Choix : "))
         if choix == 1:
             os.system('cls' if os.name == 'nt' else 'clear')
@@ -125,7 +138,16 @@ def main():
         elif choix == 4:
             os.system('cls' if os.name == 'nt' else 'clear')
             pkapkaLecture.afficher_membre()
+        elif choix == 5:
+            os.system('cls' if os.name == 'nt' else 'clear')
+            pkapkaLecture.supprimer_livre()
+        elif choix == 6:
+            os.system('cls' if os.name == 'nt' else 'clear')
+        elif choix == 7:
+            os.system('cls' if os.name == 'nt' else 'clear')
         elif choix == 8:
+            os.system('cls' if os.name == 'nt' else 'clear')
+        elif choix == 9:
             os.system('cls' if os.name == 'nt' else 'clear')
             break
 
