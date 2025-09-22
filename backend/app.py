@@ -3,8 +3,21 @@ import json
 import yt_dlp
 import os
 import shutil
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+options = [
+    "http://localhost:5173"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=options,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 BASE_DIR = os.path.expanduser("~/Downloads")
 
@@ -43,7 +56,7 @@ async def download_playlist(url : str):
         ydl_opts = {
             "format" : "bestvideo+bestaudio/best",
             "merge_output_format" : "mp4",
-            "outtmpl" : os.path.join(BASE_DIR, '%(playlist_title)s', '%(playlist_index)s.%(ext)s-%(title)s')
+            "outtmpl" : os.path.join(BASE_DIR, '%(playlist_title)s', '%(playlist_index)s-%(title)s.%(ext)s')
         }
         with  yt_dlp.YoutubeDL(ydl_opts) as ydl:
             ydl.download(url)
@@ -51,7 +64,7 @@ async def download_playlist(url : str):
     else:
         ydl_opts = {
             "format" : "best",
-            "outtmpl" : os.path.join(BASE_DIR, '%(playlist_title)s', '%(playlist_index)s.%(ext)s-%(title)s')
+            "outtmpl" : os.path.join(BASE_DIR, '%(playlist_title)s', '%(playlist_index)s-%(title)s.%(ext)s')
         }
         with  yt_dlp.YoutubeDL(ydl_opts) as ydl:
             ydl.download(url)
