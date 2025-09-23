@@ -27,45 +27,42 @@ def read_root():
 
 @app.get("/download/video")
 async def download(url : str):
-    ffmeg_path = shutil.which("ffmpeg") is not None
-    
-    if ffmeg_path:
-        ydl_opts = { 
-            "format" :"bestvideo+bestaudio/best",
-            "merge_output_format" : "mp4",
-            "outtmpl" : os.path.join(BASE_DIR, '%(title)s.%(ext)s')
-        }
-        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-            ydl.download(url)
-        return {"message": "Download and Merged Successfully"}
-    else:
+    try:
+        ffmpeg_path = shutil.which("ffmpeg") is not None
+
         ydl_opts = {
-            "format" : "best",
-            "outtmpl" : os.path.join(BASE_DIR, '%(title)s.%(ext)s')
+            "format": "bestvideo+bestaudio/best" if ffmpeg_path else "best",
+            "merge_output_format": "mp4" if ffmpeg_path else None,
+            "outtmpl": os.path.join(BASE_DIR, "%(title)s.%(ext)s"),
+            "noplaylist": True
         }
+        
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             ydl.download(url)
-        return {"message": "Downloaded Successfully without Merging"}
+        return {
+            "type": "Video",
+            "message": "Video Downloaded Succesfully"
+        }
+    except Exception as e:
+        return { "Error -> ": str(e) }
 
 
 @app.get('/download/playlist/')
 async def download_playlist(url : str):
-    ffmeg_path = shutil.which("ffmpeg") is not None
-    
-    if ffmeg_path:
+    try:
+        ffmpeg_path = shutil.which("ffmpeg") is not None
+
         ydl_opts = {
-            "format" : "bestvideo+bestaudio/best",
-            "merge_output_format" : "mp4",
-            "outtmpl" : os.path.join(BASE_DIR, '%(playlist_title)s', '%(playlist_index)s-%(title)s.%(ext)s')
+            "format": "bestvideo+bestaudio/best" if ffmpeg_path else "best",
+            "merge_output_format": "mp4" if ffmpeg_path else None,
+            "outtmpl": os.path.join(BASE_DIR, "%(title)s.%(ext)s"),
+            "noplaylist": False
         }
         with  yt_dlp.YoutubeDL(ydl_opts) as ydl:
             ydl.download(url)
-        return {"message": "Playlist Downloaded and Merged Successfully"}
-    else:
-        ydl_opts = {
-            "format" : "best",
-            "outtmpl" : os.path.join(BASE_DIR, '%(playlist_title)s', '%(playlist_index)s-%(title)s.%(ext)s')
+        return {
+            "type": "playlist",
+            "message": "Playlist Downloaded and Merged Successfully"
         }
-        with  yt_dlp.YoutubeDL(ydl_opts) as ydl:
-            ydl.download(url)
-        return {"message": "Playlist Downloaded Successfully without Merging"}
+    except Exception as e:
+        return { "Error -> ": str(e) }
